@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% extends "layout.html" %} {% block body %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Books</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
+      integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height */
+        text-align: center;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5; /* Optional for better aesthetics */
+      }
+
+      #main {
+        width: 80%;
+        max-width: 800px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 1.5em;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 2em;
+        color: #333;
+      }
+
+      .toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 1em 0;
+      }
+
+      .pure-table {
+        margin: 1em auto;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div class="header">
+        <h1>Books by genre</h1>
+      </div>
+
+      <div class="pure-g">
+          <a class="pure-button" href="{{ url_for('all_books') }}">Back</a>
+        <div class="pure-u-1-1">
+            <h3>{{genre_name}}</h4>
+          <table class="pure-table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Added</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%- for book in books %}
+                <tr>
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.added.strftime("%d-%m-%Y") }}</td>
+                </tr>
+                {%- endfor %}
+                </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}
